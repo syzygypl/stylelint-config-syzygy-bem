@@ -1,7 +1,7 @@
 # stylelint-config-syzygy-bem
 > SYZYGY [`stylelint`](https://github.com/stylelint/stylelint) config for BEM methodology
 
-Stylelint BEM config based on [`stylelint-selector-bem-pattern`](https://github.com/simonsmith/stylelint-selector-bem-pattern).
+Stylelint BEM config build upon [`stylelint-selector-bem-pattern`](https://github.com/simonsmith/stylelint-selector-bem-pattern) plugin.
 
 ## Rules
 
@@ -34,20 +34,18 @@ Simply set your `stylelint` config to extend `stylelint-config-syzygy-bem`:
 ### Implicit components
 
 By default all linted stylesheets are treated as implicit components. It means that component
-names used for linting are based on the filenames. To narrow down implicit component
-overwrite `implicitComponents` config option. For example:
+names used for linting are based on the filenames. Although [plugin config allows to narrow down
+implicit components](https://github.com/postcss/postcss-bem-linter#define-components-and-utilities-implicitly-based-on-their-filename),
+[stylelint does not allow to merge nested options](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/faq.md#if-i-use-extends-within-my-configuration-object-will-the-options-for-each-rule-be-merged-or-overridden).
+It means that to disable it for some files, `stylelint-disable` comment is required. Example:
 
-```json
-{
-  "extends": [
-    "stylelint-config-syzygy-bem"
-  ],
-  "rules": {
-    "plugin/selector-bem-pattern": {
-        "implicitComponents": "components/**/*.css"
-    }
-  }
+```css
+/* not-bem.css */
+/* stylelint-disable plugin/selector-bem-pattern */
+a {
+    color: inherit;
 }
+/* stylelint-enable plugin/selector-bem-pattern */
 ```
 
 
