@@ -17,6 +17,12 @@ _You can accept this config as it is or just copy-paste the things you like from
 
 ## Installation
 
+Make sure you have `stylelint` installed:
+```bash
+npm install --save-dev stylelint
+```
+
+then install the config:
 ```bash
 npm install --save-dev stylelint-config-syzygy-bem
 ```
