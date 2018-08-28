@@ -1,10 +1,20 @@
 "use strict";
 
-const BLOCK_NAME = "[a-z][a-z0-9]*((?!-$)-?[a-z0-9]+)*";
-const NO_NAMESPACE_MODIFIERS = ".-is-|.-has-";
-const BLOCK_TAIL = "(((__|--|"+ NO_NAMESPACE_MODIFIERS +")(([a-z0-9\\[\\]'=]+(?!-$)-?)+))+)";
-const VARIABLE = "#{\\$" + BLOCK_NAME + "}";
-const VARS_IN_MODIFIER = "-((-#{\\$[a-z]+}|(-[a-z0-9]+)))*";
+const IDENTIFIER = '[a-z][a-z0-9]*'; // foo
+const IDENTIFIER_FOLLOWING = '[a-z0-9]+'; // 0foo
+const VARIABLE_NAME = `#{\\$${IDENTIFIER}}`;
+const ROOT_VARIABLE = '#{\\$root}';
+
+const BLOCK_NAME = `${IDENTIFIER}(-${IDENTIFIER_FOLLOWING})*`; // foo-bar, foo, foo-bar-baz
+const ELEMENT_NAME = `${IDENTIFIER_FOLLOWING}(?:-${IDENTIFIER_FOLLOWING})*`; // foo-bar, foo, foo-bar-baz, 0foo-bar
+const MODIFIER_NAME = `(?:(?:${VARIABLE_NAME}-)?${ELEMENT_NAME}(?:-${VARIABLE_NAME})?|${VARIABLE_NAME})` ; // #{$var}-foo-#{$var}, #{$var}-foo, #{$var}
+const NO_NAMESPACE_MODIFIERS = `(?:is|has)-(${ELEMENT_NAME})`; // is-bar, has-baz, is-foo-bar
+const SUFFIX = `(?:--${MODIFIER_NAME})?(?:\\.-${NO_NAMESPACE_MODIFIERS})?`;
+const PREFIX = `(?:\\.|(?=%))`; // component starts with a dot, placeholder needs a %
+
+const FILE_NAME = `^%?${BLOCK_NAME}$`
+const INITIAL_SELECTOR = `^(${PREFIX}{componentName}(?:__${ELEMENT_NAME})?)${SUFFIX}(\\1${SUFFIX})?$`;
+const COMBINED_SELECTOR = `^(\\.{componentName}|${ROOT_VARIABLE})__${ELEMENT_NAME}${SUFFIX}$`;
 
 module.exports = {
   "plugins": [
@@ -13,19 +23,13 @@ module.exports = {
   "rules": {
     "plugin/selector-bem-pattern": {
       "implicitComponents": true,
-      "componentName": "^%?" + BLOCK_NAME + "$",
+      "componentName": FILE_NAME,
       "componentSelectors": {
-        "initial": "^\\.{componentName}" + BLOCK_TAIL + "?$",
+        "initial": INITIAL_SELECTOR,
+        "combined": COMBINED_SELECTOR,
       },
       "ignoreSelectors": [
-        "^%" + BLOCK_NAME + BLOCK_TAIL + "?$", // %placeholders
-        "^#{\\$root}" + BLOCK_TAIL + "?$", // #{$root}__in-component-name
-        "^\\." + BLOCK_NAME + BLOCK_TAIL + "?#{\\$root}" + BLOCK_TAIL + "$", // &#{$root}__element-mix
-        "^\\." + BLOCK_NAME + BLOCK_TAIL + '?--' + VARIABLE + "$", // .variable-in--#{$modifier}
-        "^&" + VARS_IN_MODIFIER + "$", // .vars-in-block--#{$modifier}-can-be-#{$multiple}
-        "^&__" + BLOCK_NAME + VARS_IN_MODIFIER + "$", // .vars-in__element--#{$modifier}-can-#{$be}-multiple
-        "^(.* )?svg$",
-        "^(.* )?img$",
+        "^(svg|img)$",
       ],
     },
   },

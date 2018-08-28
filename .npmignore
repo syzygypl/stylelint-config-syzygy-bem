@@ -1,0 +1,5 @@
+.gitignore
+.nvmrc
+.idea
+CHANGELOG.md
+tests
