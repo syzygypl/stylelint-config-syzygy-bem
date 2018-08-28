@@ -27,7 +27,10 @@ each([
   ['foo-bar-baz', '.foo-bar-baz--bar-eglebegle', true],
   ['foo-bar-baz', '.foo-bar-baz--bar-eglebegle-bam', true],
 
-  ['foo', '.foo--bar.foo--baz', false], // nie robimy tego
+  ['foo', '.foo--bar.foo--baz', true],
+  ['foo', '.foo__element--bar.foo__element--baz', true],
+  ['foo', '.foo__element--bar.foo--baz', false],
+  ['foo', '.foo--bar.foo__element--baz', false],
 
   // element modifiers
   ['foo', '.foo__element--bar', true],
@@ -42,15 +45,13 @@ each([
   ['foo', '.foo--mod .bar__element--mod', false],
 
 
-  ['foo', '.foo--baz.foo--bar', false],
-
-
   // state modifiers
   ['foo', '.foo.-is-bar', true],
   ['foo', '.foo.-has-bar', true],
   ['foo', '.foo__element.-is-bar', true],
   ['foo', '.foo__element.-has-bar', true],
   ['foo', '.foo__element.-has-', false],
+  ['foo', '.foo__element--modifier.-has-bar', true],
 
   // placeholders:
   ['%foo-bar', '%foo-bar', true],
@@ -74,9 +75,6 @@ each([
   ['foo', '.foo--#{$prefix}-modi-#{$suffix}', true],
 
   ['foo-bar', '.foo-bar__ele-ment--modi-fier', true],
-
-  // "^\\." + BLOCK_NAME + BLOCK_TAIL + "?#{\\$root}" + BLOCK_TAIL + "$", // &#{$root}__element-mix
-
 
   // exceptions:
 
@@ -124,9 +122,15 @@ each([
     },
   });
 
+  const message = [
+    `Initial: ${config.componentSelectors.initial}`,
+    `Combined: ${config.componentSelectors.combined}`,
+    `Selector: ${selector}`
+  ].join("\n");
+
   if (shouldMatch) {
-    expect(warning, config.componentSelectors.initial).toBeFalsy();
+    expect(!warning, message).toBeTruthy();
   } else {
-    expect(warning, selector).toBeTruthy();
+    expect(!warning, message).toBeFalsy();
   }
 });
