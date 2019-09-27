@@ -17,22 +17,27 @@
   "files": [
     "index.js"
   ],
+  "engines": {
+    "node": "10.16.3"
+  },
   "scripts": {
     "test": "jest"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "jest-expect-message"
+    "setupFilesAfterEnv": [
+      "jest-expect-message"
+    ]
   },
   "dependencies": {
-    "stylelint-selector-bem-pattern": "^2.0.0"
+    "stylelint-selector-bem-pattern": "^2.1.0"
   },
   "devDependencies": {
-    "jest": "^23.5.0",
-    "jest-each": "^23.5.0",
-    "jest-expect-message": "^1.0.0",
-    "stylelint": "^9.2.1"
+    "jest": "^24.9.0",
+    "jest-each": "^24.9.0",
+    "jest-expect-message": "^1.0.2",
+    "stylelint": "^11.0.0"
   },
   "peerDependencies": {
-    "stylelint": "^8.3.0 || ^9.0.0"
+    "stylelint": ">=8.3.0"
   }
 }
