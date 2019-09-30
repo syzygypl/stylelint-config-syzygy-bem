@@ -17,9 +17,6 @@
   "files": [
     "index.js"
   ],
-  "engines": {
-    "node": "10.16.3"
-  },
   "scripts": {
     "test": "jest"
   },
