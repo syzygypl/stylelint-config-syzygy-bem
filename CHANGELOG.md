@@ -1,4 +1,4 @@
-# 1.1.1
+# 1.1.1 - 1.1.2
 - Dependencies updated
 
 # 1.1.0
