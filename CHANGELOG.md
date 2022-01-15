@@ -1,4 +1,4 @@
-# TBA
+# 2.0.0
 - Upgrade dependencies.
 
 # 1.1.1 - 1.1.2
