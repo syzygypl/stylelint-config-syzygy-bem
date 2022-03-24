@@ -1,3 +1,6 @@
+# 2.0.2
+- Disable `selector-class-pattern` and `keyframes-name-pattern` rules as this config itself handles class names.
+
 # 2.0.0
 - Upgrade dependencies.
 

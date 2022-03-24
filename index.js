@@ -21,6 +21,8 @@ module.exports = {
     "stylelint-selector-bem-pattern",
   ],
   "rules": {
+    "selector-class-pattern": null,
+    "keyframes-name-pattern": null,
     "plugin/selector-bem-pattern": {
       "implicitComponents": true,
       "componentName": FILE_NAME,
