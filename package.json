@@ -1,11 +1,16 @@
 {
   "name": "stylelint-config-syzygy-bem",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "SYZYGY stylelint config for BEM methodology",
   "keywords": [
     "stylelint",
     "stylelint-config",
-    "stylelint-bem"
+    "stylelint-bem",
+    "css",
+    "scss",
+    "style",
+    "bem",
+    "lint"
   ],
   "author": "SYZYGY Warsaw",
   "license": "MIT",

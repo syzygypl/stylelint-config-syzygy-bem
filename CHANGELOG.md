@@ -1,4 +1,4 @@
-# TBA
+# 2.1.0
 - Add `stylelint` v15 and `stylelint-selector-bem-pattern` v3 compatibility. 
 
 # 2.0.2
