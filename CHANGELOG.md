@@ -1,5 +1,8 @@
+# TBA
+- Add `stylelint@^16` support and drop `stylelint@^14`.
+
 # 2.1.0
-- Add `stylelint` v15 and `stylelint-selector-bem-pattern` v3 compatibility. 
+- Add `stylelint^@15` and `stylelint-selector-bem-pattern@^3` compatibility. 
 
 # 2.0.2
 - Disable `selector-class-pattern` and `keyframes-name-pattern` rules as this config itself handles class names.
