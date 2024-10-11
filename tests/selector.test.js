@@ -100,7 +100,32 @@ each([
   ['foo', '#foo', false],
   ['element', 'element', false],
 
-]).test('these selectors should match', (componentName, selector, shouldMatch) => {
+  // using #{$root} to allow combined modifiers
+  /**
+   * .foo {
+   *     $root: &
+   *     &--alpha {
+   *         &#{$root}--bravo {
+   *             // both modifiers at the same time
+   *         }
+   *     }
+   * }
+   */
+  ['foo', '.foo--alpha#{$root}--bravo', true],
+  /**
+   * .foo {
+   *     $root: &
+   *     &--alpha {
+   *         #{$root}--charlie#{$root}--bravo {
+   *             // the --charlie modifier has no business here
+   *         }
+   *     }
+   * }
+   */
+  ['foo', '#{$root}--charlie#{$root}--bravo', false],
+  ['foo', '#{$root}--other-mod.foo--mod', false],
+
+]).test('%s: "%s" selector should match: %p', (componentName, selector, shouldMatch) => {
 
   let warning = null;
 

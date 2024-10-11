@@ -13,7 +13,7 @@ const SUFFIX = `(?:--${MODIFIER_NAME})?(?:\\.-${NO_NAMESPACE_MODIFIERS})?`;
 const PREFIX = `(?:\\.|(?=%))`; // component starts with a dot, placeholder needs a %
 
 const FILE_NAME = `^%?${BLOCK_NAME}$`
-const INITIAL_SELECTOR = `^(${PREFIX}{componentName}(?:__${ELEMENT_NAME})?)${SUFFIX}(\\1${SUFFIX})?$`;
+const INITIAL_SELECTOR = `^(${PREFIX}{componentName}(?:__${ELEMENT_NAME})?)${SUFFIX}((\\1|${ROOT_VARIABLE})${SUFFIX})?$`;
 const COMBINED_SELECTOR = `^(\\.{componentName}|${ROOT_VARIABLE})__${ELEMENT_NAME}${SUFFIX}$`;
 
 module.exports = {
