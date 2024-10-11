@@ -1,4 +1,4 @@
-# TBA
+# 2.3.0
 - Drop `stylelint@^15` support due to [`stylelint-selector-bem-pattern`](https://github.com/simonsmith/stylelint-selector-bem-pattern) major update.
 
 # 2.2.0
